@@ -1,7 +1,7 @@
 export default {
-  orders: state => {
-    return state.orders;
-  },
+  // orders: state => {
+  //   return state.orders;
+  // },
 
   members: state => {
     return state.members;

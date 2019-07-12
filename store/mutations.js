@@ -1,12 +1,12 @@
 export default {
-  addNewOrder(state, newOrder) {
-    state.orders.push(newOrder);
-  },
-  setOrders(state, orders) {
-    console.log("Call set Order here:", orders);
-    state.orders = orders;
-    console.log("After set order:", state.orders);
-  },
+  // addNewOrder(state, newOrder) {
+  //   state.orders.push(newOrder);
+  // },
+  // setOrders(state, orders) {
+  //   console.log("Call set Order here:", orders);
+  //   state.orders = orders;
+  //   console.log("After set order:", state.orders);
+  // },
   addNewMember(state, newMember) {
     state.members.psuh(newMember);
   },

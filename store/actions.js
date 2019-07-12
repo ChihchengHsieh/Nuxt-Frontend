@@ -2,22 +2,22 @@ import { json } from "graphlib";
 
 export default {
   async nuxtServerInit(context, req) {
-    const ordersData = await this.$axios.$get("/order/");
-    console.log("in nuxt", ordersData);
-    context.commit("setOrders", ordersData.orders);
+    // const ordersData = await this.$axios.$get("/order/");
+    // console.log("in nuxt", ordersData);
+    // context.commit("setOrders", ordersData.orders);
 
     const { members } = await this.$axios.$get("/member/");
     console.log("in next members:", members);
     context.commit("setMembers", members);
   },
 
-  async addNewOrder(context, newOrder) {
-    var bodyFormData = new FormData();
-    bodyFormData.set("receiver", newOrder.receiver);
-    bodyFormData.set("products", JSON.stringify(newOrder.products));
-    const result = await this.$axios.$post("/order/", bodyFormData);
-    context.commit("addNewOrder", newOrder);
-  },
+  // async addNewOrder(context, newOrder) {
+  //   var bodyFormData = new FormData();
+  //   bodyFormData.set("receiver", newOrder.receiver);
+  //   bodyFormData.set("products", JSON.stringify(newOrder.products));
+  //   const result = await this.$axios.$post("/order/", bodyFormData);
+  //   context.commit("addNewOrder", newOrder);
+  // },
 
   async addNewMember(context, name) {
     var bodyFormData = new FormData();
@@ -65,7 +65,7 @@ export default {
   async updateMember(context, payload) {
     const { uid, member } = payload;
     var bodyFormData = new FormData();
-    console.log("Member 1:", member);
+    console.log("Member 1:", member); 
     bodyFormData.set("member", JSON.stringify(member));
     console.log("Member 2:", member);
     const res = await this.$axios.put(`/member/${uid}`, bodyFormData);
@@ -79,7 +79,7 @@ export default {
 
   async deleteMember(context, uid) {
     const res = await this.$axios.delete(`/member/${uid}`);
-    console.log("res",res)
+    console.log("res", res);
     context.commit("deleteMember", uid);
   },
 
