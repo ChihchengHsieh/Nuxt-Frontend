@@ -1,41 +1,41 @@
 <template>
   <v-card>
     <v-layout wrap>
-      <v-flex x2>
-        <v-text-field label="OrderNum" v-model="orderNum"></v-text-field>
+      <v-flex xs12 pa-3 sm2>
+        <v-text-field label="訂單號" v-model="orderNum"></v-text-field>
       </v-flex>
-      <v-flex x2>
-        <v-text-field label="Name" v-model="name"></v-text-field>
+      <v-flex xs12 pa-3 sm10>
+        <v-text-field label="商品名" v-model="name"></v-text-field>
       </v-flex>
-      <v-flex x2>
-        <v-text-field label="Quantity" v-model="quantity"></v-text-field>
+      <v-flex xs12 pa-3 sm2>
+        <v-text-field label="數量" v-model="quantity"></v-text-field>
       </v-flex>
-      <v-flex x2>
-        <v-text-field label="BuyPriceAUD" v-model="buyPriceAUD"></v-text-field>
+      <v-flex xs12 pa-3 sm10>
+        <v-text-field label="廠商" v-model="seller"></v-text-field>
       </v-flex>
-      <v-flex x2>
-        <v-text-field label="SellPriceTWD" v-model="sellPriceTWD"></v-text-field>
+      <v-flex xs12 pa-3 sm6 v-if="$store.getters.isAdmin"> 
+        <v-text-field label="買$AUD" v-model="buyPriceAUD"></v-text-field>
       </v-flex>
-      <v-flex xs2>
-        <v-text-field label="Seller" v-model="seller"></v-text-field>
+      <v-flex xs12 pa-3 :class="{'sm6 xs12': $store.getters.isAdmin}">
+        <v-text-field label="賣$TWD" v-model="sellPriceTWD"></v-text-field>
       </v-flex>
-      <v-flex xs1 @click="()=>toggleBox('bought')">
-        Bought
+
+      <v-flex pa-3 xs4 @click="()=>toggleBox('bought')">
+        買
         <v-icon>{{bought? "check_box":"check_box_outline_blank"}}</v-icon>
       </v-flex>
-      <v-flex xs1 @click="()=>toggleBox('paid')">
-        Paid
+      <v-flex pa-3 xs4 @click="()=>toggleBox('paid')">
+        付
         <v-icon>{{paid? "check_box":"check_box_outline_blank"}}</v-icon>
       </v-flex>
-      <v-flex xs1 @click="()=>toggleBox('received')">
-        Received
+      <v-flex pa-3 xs4 @click="()=>toggleBox('received')">
+        收
         <v-icon>{{received? "check_box":"check_box_outline_blank"}}</v-icon>
       </v-flex>
-      <v-flex xs12>
-        <v-textarea label="Remark" v-model="remark"></v-textarea>
+      <v-flex xs12 pa-3>
+        <v-textarea label="備註" v-model="remark"></v-textarea>
       </v-flex>
-      <v-btn @click="updateProduct">Edit</v-btn>
-      <v-btn>Delete</v-btn>
+      <v-btn @click="updateProduct">編輯</v-btn>
     </v-layout>
   </v-card>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <v-layout wrap>
     <v-flex xs12>
-      <v-text-field label="Search" v-model="searching"></v-text-field>
+      <v-text-field label="搜尋" v-model="searching"></v-text-field>
     </v-flex>
     <v-flex xs12>
       <product-list-vue :products="buyingProduct"></product-list-vue>

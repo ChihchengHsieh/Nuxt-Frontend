@@ -1,28 +1,15 @@
 <template>
-  <v-app light class="cusFont">
-    <v-navigation-drawer v-model="drawer" :clipped="true" fixed app>
-      <v-list>
-        <v-list-tile v-for="(item, i) in items" :key="i" :to="item.to" router exact>
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title" />
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
+  <v-app light>
     <v-toolbar clipped-left fixed app color="primary" prominent>
-      <v-toolbar-side-icon @click="drawer = !drawer" />
-      <v-toolbar-title :class="{'mobileTitle ':$vuetify.breakpoint.smAndDown}">
-        <nuxt-link to="/" class="black--text">Shop4you.AU</nuxt-link>
-      </v-toolbar-title>
+      <v-toolbar-title
+        :class="{'mobileTitle ':$vuetify.breakpoint.smAndDown}"
+        v-text="`Shop4you.AU`"
+      />
       <v-spacer />
       <v-btn color="primary" to="/auth/login" v-if="!$store.getters.isLogin">登入</v-btn>
       <v-btn color="primary" to="/auth/signup" v-if="!$store.getters.isLogin">註冊</v-btn>
       <v-btn color="primary" @click.stop="logoutUser" v-if="$store.getters.isLogin">登出</v-btn>
     </v-toolbar>
-
     <v-content>
       <v-container>
         <nuxt />
@@ -41,23 +28,23 @@ export default {
       items: [
         {
           icon: "apps",
-          title: "首頁",
+          title: "All Orders",
           to: "/"
         },
 
         {
           icon: "account_box",
-          title: "買家",
+          title: "Members",
           to: "/member"
         },
         {
           icon: "view_list",
-          title: "所有商品",
+          title: "Products",
           to: "/product"
         },
         {
           icon: "store",
-          title: "購物清單",
+          title: "Shopping List",
           to: "/product/shopping"
         }
       ],
@@ -68,7 +55,6 @@ export default {
     };
   },
 
-  middleware: ["auth"],
   methods: {
     logoutUser() {
       this.$store.dispatch("logoutUser");
@@ -77,9 +63,8 @@ export default {
   }
 };
 </script>
-
 <style >
-.cusFont {
-  font-family: "Noto Sans TC", sans-serif;
+.mobileTitle {
+  /* font-size: 1rem !important; */
 }
 </style>

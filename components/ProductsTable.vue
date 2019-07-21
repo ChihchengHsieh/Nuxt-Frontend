@@ -1,57 +1,66 @@
 <template>
-  <v-layout>
+  <v-layout wrap>
+    <v-flex xs12 pa-3>
+      <products-amount-vue :products="sortedProducts" />
+    </v-flex>
+
     <v-flex xs12>
-      <v-list xs12>
+      <v-list xs12 two-line>
         <v-list-tile>
-          <v-layout wrap justify-start align-center>
+          <v-layout
+            wrap
+            justify-start
+            align-center
+            :class="{'mobileColumn':$vuetify.breakpoint.smAndDown}"
+          >
             <v-flex xs1>
               <v-list-tile-content>
-                <strong>Order</strong>
+                <strong>單</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs4 sm3 :class="{'sm4': !$store.getters.isAdmin}">
               <v-list-tile-content>
-                <strong>Name</strong>
+                <strong>商品</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs1>
+            <v-flex xs2 sm1>
               <v-list-tile-content>
-                <strong>Qua.</strong>
+                <strong>量</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs1>
+            <v-flex xs1 v-if="$vuetify.breakpoint.smAndUp  && $store.getters.isAdmin">
               <v-list-tile-content>
-                <strong>Buy$</strong>
+                <strong>買(AU)</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs1>
+            <v-flex xs2 sm1 :class="{'sm2': !$store.getters.isAdmin}">
               <v-list-tile-content>
-                <strong>Sell$</strong>
+                <strong>賣(TW)</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs1>
+            <v-flex xs1 v-if="$vuetify.breakpoint.smAndUp">
               <v-list-tile-content>
-                <strong>Seller</strong>
+                <strong>廠商</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs1>
+            <v-flex xs1 v-if="$vuetify.breakpoint.smAndUp  && $store.getters.isAdmin">
               <v-list-tile-content>
-                <strong>Earn$</strong>
-              </v-list-tile-content>
-            </v-flex>
-            <v-flex xs1>
-              <v-list-tile-content>
-                <strong>Bought</strong>
-              </v-list-tile-content>
-            </v-flex>
-            <v-flex xs1>
-              <v-list-tile-content>
-                <strong>Paid</strong>
+                <strong>利(TW)</strong>
               </v-list-tile-content>
             </v-flex>
             <v-flex xs1>
               <v-list-tile-content>
-                <strong>Received</strong>
+                <strong>買</strong>
+              </v-list-tile-content>
+            </v-flex>
+            <v-flex xs1>
+              <v-list-tile-content>
+                <strong>付</strong>
+              </v-list-tile-content>
+            </v-flex>
+            <v-flex xs1>
+              <v-list-tile-content>
+                <strong>收</strong>
               </v-list-tile-content>
             </v-flex>
           </v-layout>
@@ -64,36 +73,36 @@
                 <strong>{{p.orderNum}}</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs3>
-              <v-list-tile-content>
+            <v-flex xs4 sm3 :class="{'sm4': !$store.getters.isAdmin}">
+              <v-list-tile-content :class="{'mobileListFont':$vuetify.breakpoint.smAndDown}">
                 <nuxt-link :to="`/member/${member._id}/product/${p._id}`">
                   <strong>{{p.name}}</strong>
                 </nuxt-link>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs1>
+            <v-flex xs2 sm1>
               <v-list-tile-content>
                 <strong>{{p.quantity}}</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs1>
+            <v-flex xs1 v-if="$vuetify.breakpoint.smAndUp  && $store.getters.isAdmin">
               <v-list-tile-content>
                 <strong>{{p.buyPriceAUD}}</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs1>
+            <v-flex xs2 sm1 :class="{'sm2': !$store.getters.isAdmin}">
               <v-list-tile-content>
                 <strong>{{p.sellPriceTWD}}</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs1>
+            <v-flex xs1 v-if="$vuetify.breakpoint.smAndUp">
               <v-list-tile-content>
                 <strong>{{p.seller}}</strong>
               </v-list-tile-content>
             </v-flex>
-            <v-flex xs1>
+            <v-flex xs1 v-if="$vuetify.breakpoint.smAndUp  && $store.getters.isAdmin">
               <v-list-tile-content>
-                <strong>{{(p.sellPriceTWD - p.buyPriceAUD * 22)*p.quantity}}</strong>
+                <strong>{{((p.sellPriceTWD - p.buyPriceAUD * 22)*p.quantity).toFixed(2)}}</strong>
               </v-list-tile-content>
             </v-flex>
             <v-flex xs1>
@@ -127,16 +136,20 @@
 </template>
 
 <script>
+import ProductsAmountVue from "./ProductsAmount.vue";
+
 export default {
   props: ["member"],
 
   computed: {
     sortedProducts() {
       return this.member.products.concat().sort((a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt);
+        return Number(b.orderNum) - Number(a.orderNum);
       });
     }
   },
+
+  components: { ProductsAmountVue },
 
   methods: {
     async toggleBox(type, pid, currentState) {

@@ -7,7 +7,11 @@
 </template>
 
 <script>
-export default {};
+
+// gcloud app deploy app.yaml --project shop4you-au-frontend
+export default {
+  
+};
 </script>
 
 <style>

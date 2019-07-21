@@ -1,7 +1,7 @@
 <template>
   <v-layout wrap>
     <v-flex class="text-xs-right" mb-2>
-      <delete-icon-vue :deleteFunction="productDeleteFunction">Delete this product?</delete-icon-vue>
+      <delete-icon-vue :deleteFunction="productDeleteFunction">{{`幫買家 ${member.name} 刪除此商品嗎?`}}</delete-icon-vue>
     </v-flex>
     <v-flex xs12>
       <product-editing-from-vue :member="member" :product="product"></product-editing-from-vue>

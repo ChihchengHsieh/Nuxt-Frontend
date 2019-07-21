@@ -8,11 +8,22 @@ export default {
   //   console.log("After set order:", state.orders);
   // },
   addNewMember(state, newMember) {
-    state.members.psuh(newMember);
+    // console.log("current state:", state);
+    // console.log("current members is ", state.members);
+    state.members.push(newMember);
+    // console.log("after members is ", state.members);
   },
 
   setMembers(state, members) {
     state.members = members;
+  },
+
+  setToken(state, token) {
+    state.token = token;
+  },
+
+  setUser(state, user) {
+    state.user = user;
   },
 
   addNewProductToMember(state, payload) {

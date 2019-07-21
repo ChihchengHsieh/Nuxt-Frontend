@@ -1,20 +1,22 @@
 <template>
   <div>
     <v-layout wrap>
-      <v-flex xs12>
-        <v-text-field label="Search" v-model="searching"></v-text-field>
-      </v-flex>
+      <!-- <v-flex xs12>
+        <v-text-field label="搜尋" v-model="searching"></v-text-field>
+      </v-flex>-->
       <v-flex xs12 text-xs-center ma-auto>
         <v-layout wrap>
-          <v-text-field label="Name" v-model="name"></v-text-field>
-          <v-btn @click="addMember">ADD</v-btn>
+          <v-text-field label="名稱" v-model="name" v-on:keyup.enter="addMember"></v-text-field>
+          <v-btn @click="addMember">加入</v-btn>
         </v-layout>
       </v-flex>
-      <v-flex xs4 pa-3 v-for="(m, idx) in members" :key="idx">
-        <v-card>
-          <nuxt-link :to="`/member/${m._id}`">
-            <v-card-title>{{m.name}}</v-card-title>
-          </nuxt-link>
+      <v-flex xs12 sm6 lg4 pa-3 v-for="(m, idx) in members" :key="idx">
+        <v-card :to="`/member/${m._id}`">
+          <v-card-title class="font-weight-black headline">
+            <v-layout column class="align-center justify-center">
+              <div class="cusFont">{{m.name}}</div>
+            </v-layout>
+          </v-card-title>
         </v-card>
       </v-flex>
     </v-layout>
@@ -25,8 +27,7 @@
 export default {
   data() {
     return {
-      name: "",
-      searching: ""
+      name: ""
     };
   },
 
@@ -39,11 +40,11 @@ export default {
 
   computed: {
     members() {
-      if (this.searching.trim() === "") {
+      if (this.name.trim() === "") {
         return this.$store.getters.members;
       }
       return this.$store.getters.members.filter(m =>
-        m.name.includes(this.searching)
+        m.name.includes(this.name)
       );
     }
   }

@@ -23,8 +23,13 @@ export default {
         rel: "stylesheet",
         href:
           "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
+      },
+      {
+        href:
+          "https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,700,900&display=swap",
+        rel: "stylesheet"
       }
-    ],
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -43,9 +48,10 @@ export default {
    */
   modules: [
     "@nuxtjs/vuetify",
-    // Doc: https://axios.nuxtjs.org/usage
+    // Doc: https://axios.nuxtjs.org/usageomjilvyngh m
     "@nuxtjs/axios",
-    "@nuxtjs/proxy"
+    "@nuxtjs/proxy",
+    "cookie-universal-nuxt"
   ],
   /*
    ** Axios module configuration
@@ -57,9 +63,11 @@ export default {
     credentials: true
   },
 
+  //https://shop4you-au.appspot.com/
+  //http://localhost:8080
   proxy: {
     "/api": {
-      target: "http://localhost:8080",
+      target: "https://shop4you-au.appspot.com/",
       changeOrigin: true,
       pathRewrite: {
         "^/api": ""

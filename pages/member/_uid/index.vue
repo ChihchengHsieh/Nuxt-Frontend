@@ -2,15 +2,15 @@
   <v-layout wrap>
     <!-- Setting adding product here -->
     <v-flex class="text-xs-right" mb-2>
-      <delete-icon-vue :deleteFunction="memberDeleteFunction">Delete this member?</delete-icon-vue>
+      <delete-icon-vue :deleteFunction="memberDeleteFunction">{{`刪除 ${member.name} 買家嗎?`}}</delete-icon-vue>
       <!-- <v-btn>DELETE</v-btn> -->
     </v-flex>
 
     <v-flex xs12 mb-3>
       <v-card>
         <v-card-title>{{member.name}}</v-card-title>
-        <v-textarea label="Remark" class="pa-3" v-model="remark"></v-textarea>
-        <v-btn @click="updateRemark">Save</v-btn>
+        <v-textarea label="備註" class="pa-3" v-model="remark"></v-textarea>
+        <v-btn @click="updateRemark">儲存備註</v-btn>
       </v-card>
     </v-flex>
     <v-flex xs12>
