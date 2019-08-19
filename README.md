@@ -1,5 +1,6 @@
 # Products Management
 
+Different User can see different information. For example, the profits and bought price can only be seen by admin user.
 
 
 ## Signup Page
