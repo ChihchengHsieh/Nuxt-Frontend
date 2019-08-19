@@ -1,5 +1,7 @@
 # Products Management
 
+Nuxt.js(Vue.js) + Golang(Gin) + MongoDB
+
 Different User can see different information. For example, the profits and bought price can only be seen by admin user.
 
 
