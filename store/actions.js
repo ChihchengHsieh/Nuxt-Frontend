@@ -70,7 +70,7 @@ export default {
   },
 
   setToken(context, token) {
-    console.log("In client:", process.client);
+    // console.log("In client:", process.client);
     this.$axios.setToken(token);
     // console.log("After setting token: ");
 
@@ -85,7 +85,7 @@ export default {
     var bodyFormData = new FormData();
     bodyFormData.set("name", name);
     const res = await this.$axios.$post("/member/", bodyFormData);
-    console.log(res);
+    // console.log(res);
     context.commit("addNewMember", {
       name: res.insertMember.name,
       products: [],
@@ -106,7 +106,7 @@ export default {
 
     const res = await this.$axios.post("/user/signup", bodyFormData);
 
-    console.log(res);
+    // console.log(res);
 
     context.dispatch("setToken", res.data.token);
     context.dispatch("setUser", res.data.user);
@@ -154,10 +154,10 @@ export default {
     const { id, product } = payload;
     var bodyFormData = new FormData();
 
-    console.log("id in action", id);
+    // console.log("id in action", id);
     bodyFormData.set("product", JSON.stringify(product));
     const res = await this.$axios.post(`/member/${id}/product/`, bodyFormData);
-    console.log("the rest in action", res);
+    // console.log("the rest in action", res);
     context.commit("addNewProductToMember", {
       id,
       product: res.data.addedProduct
@@ -183,12 +183,12 @@ export default {
   async updateMember(context, payload) {
     const { uid, member } = payload;
     var bodyFormData = new FormData();
-    console.log("Member 1:", member);
+    // console.log("Member 1:", member);
     bodyFormData.set("member", JSON.stringify(member));
-    console.log("Member 2:", member);
+    // console.log("Member 2:", member);
     const res = await this.$axios.put(`/member/${uid}`, bodyFormData);
-    console.log("Member 3:", member);
-    console.log("res: ", res);
+    // console.log("Member 3:", member);
+    // console.log("res: ", res);
     context.commit("updateMember", {
       uid,
       member: res.data.updatingFields
@@ -197,7 +197,7 @@ export default {
 
   async deleteMember(context, uid) {
     const res = await this.$axios.delete(`/member/${uid}`);
-    console.log("res", res);
+    // console.log("res", res);
     context.commit("deleteMember", uid);
   },
 

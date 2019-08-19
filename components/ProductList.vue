@@ -84,7 +84,7 @@
             <v-flex xs3 sm2 :class="{'sm3': !$store.getters.isAdmin}">
               <v-list-tile-content :class="{'mobileListFont':$vuetify.breakpoint.smAndDown}">
                 <nuxt-link :to="`/member/${p.uid}/product/${p._id}`">
-                  <strong>{{p.name}}</strong>
+                  <strong>{{p.name ? p.name : `(UNKNOWN PRODUCT)`}}</strong>
                 </nuxt-link>
               </v-list-tile-content>
             </v-flex>
