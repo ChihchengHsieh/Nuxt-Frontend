@@ -1,6 +1,6 @@
 <template>
   <v-app light>
-    <v-toolbar clipped-left fixed app color="primary" prominent>
+    <v-app-bar :clipped-left="true" color="primary" app>
       <v-toolbar-title
         :class="{'mobileTitle ':$vuetify.breakpoint.smAndDown}"
         v-text="`Shop4you.AU`"
@@ -9,7 +9,7 @@
       <v-btn color="primary" to="/auth/login" v-if="!$store.getters.isLogin">登入</v-btn>
       <v-btn color="primary" to="/auth/signup" v-if="!$store.getters.isLogin">註冊</v-btn>
       <v-btn color="primary" @click.stop="logoutUser" v-if="$store.getters.isLogin">登出</v-btn>
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <v-container>
         <nuxt />

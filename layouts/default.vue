@@ -1,27 +1,29 @@
 <template>
-  <v-app light class="cusFont">
+  <v-app dark class="cusFont">
     <v-navigation-drawer v-model="drawer" :clipped="true" fixed app>
       <v-list>
-        <v-list-tile v-for="(item, i) in items" :key="i" :to="item.to" router exact>
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title" />
-          </v-list-tile-content>
-        </v-list-tile>
+        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
+          <v-list-item-action>
+            <v-icon size="20">{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="body-1" v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar clipped-left fixed app color="primary" prominent>
-      <v-toolbar-side-icon @click="drawer = !drawer" />
-      <v-toolbar-title :class="{'mobileTitle ':$vuetify.breakpoint.smAndDown}">
-        <nuxt-link to="/" class="black--text">Shop4you.AU</nuxt-link>
-      </v-toolbar-title>
+    <v-app-bar :clipped-left="true" color="primary" app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="white--text" />
+      <nuxt-link
+        to="/"
+        class="black--text titleClass white--text"
+        :class="{'mobileTitle ':$vuetify.breakpoint.smAndDown}"
+      >Shop4you.AU</nuxt-link>
       <v-spacer />
       <v-btn color="primary" to="/auth/login" v-if="!$store.getters.isLogin">登入</v-btn>
       <v-btn color="primary" to="/auth/signup" v-if="!$store.getters.isLogin">註冊</v-btn>
       <v-btn color="primary" @click.stop="logoutUser" v-if="$store.getters.isLogin">登出</v-btn>
-    </v-toolbar>
+    </v-app-bar>
 
     <v-content>
       <v-container>
@@ -40,25 +42,24 @@ export default {
       fixed: false,
       items: [
         {
-          icon: "apps",
-          title: "首頁",
+          icon: "fa-users",
+          title: "買家",
           to: "/"
         },
-
         {
-          icon: "account_box",
-          title: "買家",
-          to: "/member"
-        },
-        {
-          icon: "view_list",
+          icon: "fa-list",
           title: "所有商品",
           to: "/product"
         },
         {
-          icon: "store",
+          icon: "fa-shopping-cart",
           title: "購物清單",
           to: "/product/shopping"
+        },
+        {
+          icon: "fa-truck",
+          title: "未付未收",
+          to: "/unpaid"
         }
       ],
       miniVariant: false,
@@ -81,5 +82,10 @@ export default {
 <style >
 .cusFont {
   font-family: "Noto Sans TC", sans-serif;
+}
+
+.titleClass {
+  text-decoration: none;
+  font-size: 1.6rem;
 }
 </style>

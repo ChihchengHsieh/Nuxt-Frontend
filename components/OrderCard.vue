@@ -6,77 +6,77 @@
       </v-flex>
       <v-flex xs12>
         <v-list xs12>
-          <v-list-tile>
+          <v-list-item>
             <v-layout wrap justify-start align-center>
               <v-flex xs3>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>Name</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
               <v-flex xs1>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>Qua.</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
               <v-flex xs2>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>Buy$</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
               <v-flex xs2>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>Sell$</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
               <v-flex xs2>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>Seller</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
               <v-flex xs2>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>Earn$</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
             </v-layout>
-          </v-list-tile>
+          </v-list-item>
           <v-divider></v-divider>
-          <v-list-tile v-for="(p, idx) in order.products" :key="idx">
+          <v-list-item v-for="(p, idx) in order.products" :key="idx">
             <v-layout wrap justify-start align-center>
               <v-flex xs3>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>{{p.name}}</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
               <v-flex xs1>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>{{p.quantity}}</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
               <v-flex xs2>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>{{p.buyPriceAUD}}</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
               <v-flex xs2>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>{{p.sellPriceTWD}}</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
               <v-flex xs2>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>{{p.seller}}</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
               <v-flex xs2>
-                <v-list-tile-content>
+                <v-list-item-content>
                   <strong>{{p.earningTWD}}</strong>
-                </v-list-tile-content>
+                </v-list-item-content>
               </v-flex>
             </v-layout>
-          </v-list-tile>
+          </v-list-item>
           <v-divider></v-divider>
-          <v-list-tile>All Earning: {{allEarning}}</v-list-tile>
+          <v-list-item>All Earning: {{allEarning}}</v-list-item>
         </v-list>
       </v-flex>
     </v-layout>

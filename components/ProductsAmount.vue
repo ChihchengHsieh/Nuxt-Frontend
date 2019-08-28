@@ -5,6 +5,13 @@
       <strong v-if="$vuetify.breakpoint.smAndUp">TWD</strong>
     </v-card>
     <v-spacer />
+
+    <v-card class="pa-3 ma-1">
+      <strong ma-3 pa-3>數量: {{allQua}}</strong>
+    </v-card>
+
+
+    <v-spacer />
     <v-card class="pa-3 ma-1">
       <strong>未付: $ {{unpaid}}</strong>
       <strong v-if="$vuetify.breakpoint.smAndUp">TWD</strong>
@@ -32,6 +39,13 @@ export default {
         }
       }
       return unpaid;
+    },
+    allQua(){
+      let qua = 0
+      for (const p of this.products){
+        qua += Number(p.quantity)
+      }
+      return qua
     }
   }
 };

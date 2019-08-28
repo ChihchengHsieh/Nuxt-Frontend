@@ -3,20 +3,19 @@
     <v-flex xs8 sm10>
       <v-text-field label="搜尋" v-model="searching"></v-text-field>
     </v-flex>
-    <v-flex xs4 sm2 pa-3>
+    <v-flex xs4 sm2 class="pa-3">
       <v-btn @click.stop="cleanInput" large color="primary">清除</v-btn>
     </v-flex>
 
     <v-flex xs12 pa-2>
-      <products-amount-vue :products="buyingProduct" />
+      <products-amount-vue :products="sortedProducts" />
     </v-flex>
-
     <v-flex xs12>
       <div
         v-infinite-scroll="loadMoreProdcuts"
         infinite-scroll-disabled="busy"
         infinite-scroll-distance="10"
-        infinite-scroll-throttle-delay="10000"
+        infinite-scroll-throttle-delay="1000"
       >
         <product-list-vue @copyToSearch="addSearch" :products="showingProducts"></product-list-vue>
       </div>
@@ -30,8 +29,8 @@
 </template>
 
 <script>
-import ProductListVue from "../../../components/ProductList.vue";
-import ProductsAmountVue from "../../../components/ProductsAmount.vue";
+import ProductListVue from "../../components/ProductList";
+import ProductsAmountVue from "../../components/ProductsAmount.vue";
 export default {
   data() {
     return {
@@ -47,21 +46,34 @@ export default {
     ProductsAmountVue
   },
 
-  computed: {
+  methods: {
+    cleanInput() {
+      this.searching = "";
+    },
     loadMoreProdcuts() {
       // console.log("Loading Called");
+
       this.pageN++;
     },
-    buyingProduct() {
+    addSearch(name) {
+      // console.log("AddSearch called");
+      this.searching = name;
+    }
+  },
+
+  computed: {
+    unpaidAndUnreceivedProducts() {
       if (this.searching.trim() === "") {
-        return this.$store.getters.allProducts.filter(p => !p.bought);
+        return this.$store.getters.allProducts.filter(
+          p => !p.received || !p.paid
+        );
       }
       return this.$store.getters.allProducts.filter(
-        p => p.name.includes(this.searching) && !p.bought
+        p => p.name.includes(this.searching) && (!p.received || !p.paid)
       );
     },
     sortedProducts() {
-      return this.buyingProduct.concat().sort((a, b) => {
+      return this.unpaidAndUnreceivedProducts.concat().sort((a, b) => {
         return Number(b.orderNum) - Number(a.orderNum);
       });
     },
@@ -72,15 +84,6 @@ export default {
       }
       this.busy = true;
       return this.sortedProducts;
-    }
-  },
-  methods: {
-    addSearch(name) {
-      // console.log("AddSearch called");
-      this.searching = name;
-    },
-    cleanInput() {
-      this.searching = "";
     }
   }
 };

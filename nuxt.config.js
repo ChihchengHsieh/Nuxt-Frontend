@@ -1,7 +1,7 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
-  mode: "universal",
+  mode: "spa",
   /*
    ** Headers of the page
    */
@@ -28,6 +28,10 @@ export default {
         href:
           "https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,700,900&display=swap",
         rel: "stylesheet"
+      },
+      {
+        rel: "stylesheet",
+        href: "https://use.fontawesome.com/releases/v5.0.13/css/all.css"
       }
     ]
   },
@@ -42,7 +46,14 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ["~/plugins/axios"],
+  plugins: [
+    "~/plugins/axios",
+    "~/plugins/initAuth",
+    {
+      src: "~plugins/vue-infinite-scroll",
+      ssr: false
+    }
+  ],
   /*
    ** Nuxt.js modules
    */
@@ -63,8 +74,8 @@ export default {
     credentials: true
   },
 
-  //https://shop4you-au.appspot.com/
-  //http://localhost:8080
+  // https://shop4you-au.appspot.com/
+  // http://localhost:8080
   proxy: {
     "/api": {
       target: "https://shop4you-au.appspot.com/",
@@ -79,17 +90,35 @@ export default {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
+
   vuetify: {
+    customVariables: ["~/assets/variables.scss"],
     theme: {
-      primary: colors.blue.darken2,
-      accent: colors.grey.darken3,
-      secondary: colors.amber.darken3,
-      info: colors.teal.lighten1,
-      warning: colors.amber.base,
-      error: colors.deepOrange.accent4,
-      success: colors.green.accent3
+      dark: false,
+      themes: {
+        light: {
+          primary: colors.cyan.darken2,
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3
+        }
+      }
     }
   },
+  // vuetify: {
+  //   theme: {
+  //     primary: colors.cyan.darken2,
+  //     accent: colors.grey.darken3,
+  //     secondary: colors.amber.darken3,
+  //     info: colors.teal.lighten1,
+  //     warning: colors.amber.base,
+  //     error: colors.deepOrange.accent4,
+  //     success: colors.green.accent3
+  //   }
+  // },
   /*
    ** Build configuration
    */

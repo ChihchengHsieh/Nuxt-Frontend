@@ -3,10 +3,17 @@ export default {
     // const ordersData = await this.$axios.$get("/order/");
     // console.log("in nuxt", ordersData);
     // context.commit("setOrders", ordersData.orders);
-
+    // console.log("nuxtServerInit Called");
     await context.dispatch("initAuth");
     await context.dispatch("fetchingMemberData");
     // console.log("In init: ", app.$axios);
+  },
+
+  async nuxtClientSPAInit(context) {
+    // console.log("nuxtClientInit Called");
+    await context.dispatch("initAuth");
+    // console.log("1");
+    await context.dispatch("fetchingMemberData");
   },
 
   // async addNewOrder(context, newOrder) {
@@ -36,19 +43,31 @@ export default {
       let user = null;
       let token = null;
 
+      // console.log("process.client:", process.client);
+      // console.log("2");
       if (process.client) {
-        user = JSON.parse(localStorage.getItem("user"));
-        token = JSON.parse(localStorage.getItem("token"));
+        // user = JSON.parse(localStorage.getItem("user"));
+        // token = JSON.parse(localStorage.getItem("token"));
+
+        user = localStorage.getItem("user");
+        token = localStorage.getItem("token");
+        // console.log("3");
+        // console.log("user:", user);
+        // console.log("token:", token);
 
         // console.log("Found in the client");
         // console.log("user:", user);
         // console.log("token", token);
-      } else {
+      }
+
+      if (user == null) {
         user = this.$cookies.get("user");
+        // console.log("user in cookie:", user);
+      }
+
+      if (token == null) {
         token = this.$cookies.get("token");
-        // console.log("Found in the cookies");
-        // console.log("user:", user);
-        // console.log("token", token);
+        // console.log("token in cookie:", token);
       }
 
       if (user) {
