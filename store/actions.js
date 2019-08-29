@@ -49,7 +49,7 @@ export default {
         // user = JSON.parse(localStorage.getItem("user"));
         // token = JSON.parse(localStorage.getItem("token"));
 
-        user = localStorage.getItem("user");
+        user = JSON.parse(localStorage.getItem("user"));
         token = localStorage.getItem("token");
         // console.log("3");
         // console.log("user:", user);
@@ -82,7 +82,7 @@ export default {
 
   setUser(context, user) {
     if (process.client) {
-      localStorage.setItem("user", user);
+      localStorage.setItem("user", JSON.stringify(user));
     }
     this.$cookies.set("user", user);
     context.commit("setUser", user);
