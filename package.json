@@ -16,7 +16,7 @@
     "@nuxtjs/vuetify": "^1.0.0",
     "chokidar": "^3.0.2",
     "cookie-universal-nuxt": "^2.0.16",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "vue-infinite-scroll": "^2.0.2"
   },
   "devDependencies": {
